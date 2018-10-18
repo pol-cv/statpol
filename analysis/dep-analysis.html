@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Calendar Heatmap for Parliament Events: A Case for Jair Bolsonaro</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/litera/bootstrap.min.css" />
+<link rel="stylesheet" href="cal-heatmap.css" />
+
+<body>
+
+<script defer src="https://use.fontawesome.com/releases/v5.4.1/js/solid.js" integrity="sha384-agDKwSYPuGlC0wD14lKXXwb94jlUkbkoSugquwmKRKWv/nDXe1kApDS/gqUlRQmZ" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.4.1/js/fontawesome.js" integrity="sha384-ISRc+776vRkDOTSbmnyoZFmwHy7hw2UR3KJpb4YtcfOyqUqhLGou8j5YmYnvQQJ4" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
+
+<div class="container">
+<h1>Performance of a Brazil's Parliament Member</h1>
+
+
+<h2><i class="fas fa-book-reader"></i> Jair Bolsonaro</h2>
+
+<ul>
+<li>Far-right presidential candidate in Brazil (2018 elections)</li>
+<li>Member of Brazilian Parliament since 1993 (27 years)</li>
+<li>In newspapers:
+<a href="https://www.theguardian.com/world/2018/apr/19/jair-bolsonaro-brazil-presidential-candidate-trump-parallels">The Guardian</a>,
+<a href="https://www.nytimes.com/2018/08/24/opinion/brazil-flirts-with-a-return-to-the-dark-days.html">NY Times</a>,
+<a href="https://www.economist.com/leaders/2018/09/20/jair-bolsonaro-latin-americas-latest-menace">The Economist</a></li>
+<li>On TV: <a href="https://www.youtube.com/watch?v=FsZ3p9gOkpY">Brazilian Elections: Last Week Tonight with John Oliver (HBO)</a></li>
+</ul>
+
+
+
+
+<h2><i class="fas fa-chart-area"></i> Relative comparison</h2>
+
+The following performance comparison considers 2014's most voted parliament members (deputado federal) in Brazil's most populated states.
+In case of doubts, please, check our <a href="methodology.html">methodology</a>. Datasets at the end of this page.
+
+<ul>
+	<li><strong>Approved Projects</strong>: approved projects</li>
+	<li><strong>Propositions</strong>: includes all parlamentar events, such as reports, communications, memos.</li>
+</ul>
+
+<p class="text-primary"><strong>Data ordered by performance (better first)</strong></p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Political Party</th>
+      <th scope="col">State</th>
+      <th scope="col">Month/Projects <br />(&downarrow; is better)</th>
+      <th scope="col">Performance</th>
+      <th scope="col">Weeks/Proposition <br />(&downarrow; is better)</th>
+      <th scope="col">Performance</th>
+    </tr>
+  </thead>
+  <tbody>
+	 
+    <tr>
+      <th scope="row">CHICO ALENCAR</th>
+      <td>PSOL</td>
+      <td>RJ</td>
+      <td>39.6</td>
+      <td>MORE efficient in 183.7%</td>
+      <td>0.77</td>
+      <td>MORE efficient in 220.8%</td>
+    </tr>
+	 
+    <tr>
+      <th scope="row">REGINALDO LOPES</th>
+      <td>PT</td>
+      <td>MG</td>
+      <td>49.25</td>
+      <td>MORE efficient in 128.1%</td>
+      <td>1.58</td>
+      <td>MORE efficient in 56.3%</td>
+    </tr>
+	 
+    <tr>
+      <th scope="row">CELSO RUSSOMANNO</th>
+      <td>PPB</td>
+      <td></td>
+      <td>59.8</td>
+      <td>MORE efficient in 87.8%</td>
+      <td>1.29</td>
+      <td>MORE efficient in 91.5%</td>
+    </tr>
+	 
+    <tr>
+      <th scope="row">LUIS CARLOS HEINZE</th>
+      <td>PPB</td>
+      <td>RS</td>
+      <td>61.25</td>
+      <td>MORE efficient in 83.4%</td>
+      <td>1.06</td>
+      <td>MORE efficient in 133.0%</td>
+    </tr>
+	 
+    <tr>
+      <th scope="row">TIRIRICA</th>
+      <td>PR</td>
+      <td>SP</td>
+      <td>97.0</td>
+      <td>MORE efficient in 15.8%</td>
+      <td>7.55</td>
+      <td>less efficient in 67.3%</td>
+    </tr>
+	 
+    <tr>
+      <th scope="row">JAIR BOLSONARO</th>
+      <td>PPB</td>
+      <td>RJ</td>
+      <td>112.33</td>
+      <td> same </td>
+      <td>2.47</td>
+      <td> same </td>
+    </tr>
+	 
+ </tbody>
+</table>
+
+<h2><i class="fas fa-calendar-alt"></i> Heatmap of Events</h2>
+
+<div style="margin: 20px 0">
+		<button id="update-approv" type="button" class="btn btn-outline-primary">Approved Laws</button>
+		<button id="update-laws" type="button" class="btn btn-outline-primary">Law Projects</button>
+		<button id="update-decree" type="button" class="btn btn-outline-primary">Decrees</button>
+		<button id="update-amend" type="button" class="btn btn-outline-primary">Amendments</button>
+		<button id="update-reports" type="button" class="btn btn-outline-primary">Reports, communications, memos and other</button>
+</div>
+
+
+<p>Each project is detailed at the end of the heatmap.</p>
+
+<div id="cal-heatmap"></div>
+
+<script type="text/javascript">
+(function() {
+
+	var cal = new CalHeatMap();
+	cal.init({
+domain: "year",
+subDomain: "day",
+range: 26,
+domainGutter: 10,
+domainMargin: 10,
+data: "heatmap-data-laws.json",
+start: new Date(1993, 0),
+maxDate: new Date(2018, 12),
+legendVerticalPosition: "top",
+label: {position: "left"},
+tooltip: true,
+legend: [1, 3, 5],
+verticalOrientation: true,
+onClick: function(date, nb) {
+	$("#onClick-placeholder").html("You just clicked <br/>on <b>" +
+		date + "</b> <br/>with <b>" +
+		(nb === null ? "unknown" : nb) + "</b> items"
+	);
+}
+    });
+
+
+	$("button#update-approv").on("click", function() {
+		cal.update("heatmap-data-approved.json");
+	});
+	$("button#update-laws").on("click", function() {
+		cal.update("heatmap-data-laws.json");
+	});
+	$("button#update-decree").on("click", function() {
+		cal.update("heatmap-data-decree.json");
+	});
+	$("button#update-amend").on("click", function() {
+		cal.update("heatmap-amend.json");
+	});
+	$("button#update-reports").on("click", function() {
+		cal.update("heatmap-data-reports.json");
+	});
+})();
+
+
+</script>
+
+<h2><i class="fa fa-balance-scale"></i> Details of All Projects</h2>
+
+<ul class="nav nav-tabs">
+
+<li class="nav-item">
+	<a class="nav-link active show" data-toggle="tab" href="#human-rights">human-rights</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link active show" data-toggle="tab" href="#guns">guns</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link active show" data-toggle="tab" href="#activism">activism</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link active show" data-toggle="tab" href="#militarism">militarism</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link active show" data-toggle="tab" href="#crimes">crimes</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link active show" data-toggle="tab" href="#dictatorship">dictatorship</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link active show" data-toggle="tab" href="#other">other</a>
+</li>
+
+</ul>
+
+<!--  <li class="nav-item">
+    <a class="nav-link active show" data-toggle="tab" href="#home">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#militarism">Militarism</a>
+  </li>
+-->
+
+<div id="myTabContent" class="tab-content">
+	
+	<!-- <li class="nav-item"> -->
+<!--		<a class="nav-link active show" data-toggle="tab" href="#human-rights">human-rights</a> -->
+			<div class="tab-pane fade active show" id="human-rights">
+			<ul>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1310126">PDC 18/2015</a> - Ficam sustados os efeitos do inteiro teor das Resoluções nº 11, de 18 de dezembro de 2014, e nº 12, de 16 de janeiro de 2015, do Conselho Nacional de Combate à Discriminação e Promoção dos Direitos de Lésbicas, Gays, Travestis e Transexuais - CNCD/LGBT, da Secretaria de Direitos Humanos, ambas publicadas na Seção 1 do Diário Oficial da União nº 48, de 12 de março de 2015.
+				
+					
+				<span class="badge badge-pill badge-secondary">human rights</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=37697">PDC 365/1993</a> - Torna sem efeito o Decreto de 25 de maio de 1992, que homologa a demarcação administrativa da terra indígena Yanomani nos estados de Roraima e Amazonas
+				
+					
+				<span class="badge badge-pill badge-secondary">human rights</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">indian rights</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=13967">PEC 301/1996</a> - Dá nova redação ao art. 228 da Constituição Federal.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">human rights</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">child protection</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">criminal legal age</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1640478">PL 9564/2018</a> - Estabelece a excludente de ilicitude nas ações de agentes públicos em operação sob intervenção federal destinada a pôr termo a grave comprometimento da ordem pública.
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">weaken punishment</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase impunity</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">human rights</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=456560">PL 941/2007</a> - Revoga o art. 230 e seu parágrafo único, da Lei nº 8.069, de 13 de julho de 1990, que dispõe sobre o Estatuto da Criança e do Adolescente e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">child incarceration</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">child protection</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">human rights</span>
+					
+				
+			</li>
+		
+			<li><a href="">REC 111/2012</a> - Contra a apreciação conclusiva da Comissão Especial da Câmara dos Deputados sobre o Projeto de  Lei nº 7.672 de 2010.
+
+
+				
+					
+				<span class="badge badge-pill badge-secondary">cruel treatment</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">child protection</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1096942">PL 5720/2013</a> - Revoga o art. 26, da Lei nº 5.197, de 3 de janeiro de 1967.
+				
+					
+				<span class="badge badge-pill badge-secondary">environment</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">enviromental police</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1096943">PDC 916/2013</a> - Ficam sustados os efeitos do inteiro teor do Decreto Federal nº 6.817, de 7 de abril de 2009 e da Seção III, da Portaria IBAMA nº 11, de 10 de junho de 2009, que versa sobre &#34;porte, uso e emprego de armamentos&#34; por servidores do Órgão.
+				
+					
+				<span class="badge badge-pill badge-secondary">environment</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">enviromental police</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1247434">PL 7422/2014</a> - Altera a redação do inciso V, do art. 6º, da Lei nº 6.938, de 31 de agosto de 1981 e do § 1º, do art. 70, da Lei nº 9.605, de 12 de fevereiro de 1998, para incluir, de forma expressa, as Polícias Militares dos Estados e do Distrito Federal no Sistema Nacional do Meio Ambiente - SISNAMA, bem como disciplinar o exercício das atividades de policiamento ambiental.
+				
+					
+				<span class="badge badge-pill badge-secondary">environment</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">enviromental police</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1294513">PDC 1662/2014</a> - Ficam sustados os efeitos da Portaria Interministerial nº 2, de 20 de novembro de 2014, que institui Grupo de Trabalho com a finalidade de adotar medidas visando receber denúncias de crimes de discriminação nas redes sociais on line.
+				
+					
+				<span class="badge badge-pill badge-secondary">internet</span>
+					
+				
+			</li>
+		
+			</ul>
+	</div>
+	<!-- </li> -->
+	
+	<!-- <li class="nav-item"> -->
+<!--		<a class="nav-link active show" data-toggle="tab" href="#guns">guns</a> -->
+			<div class="tab-pane fade active show" id="guns">
+			<ul>
+		
+			<li><a href="None">PL 3075/1997</a> - Autoriza o porte federal de arma de fogo aos Congressistas.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 4048/1993</a> - DISPÕE SOBRE O REGISTRO NACIONAL DE CONTROLE DE ARMAS DE FOGO, PORTE DE ARMAS E DA OUTRAS PROVIDENCIAS.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=337450">PL 5852/2005</a> - Dá nova redação ao inciso I, do art. 6º, da Lei nº 10.826, de 22 de dezembro de 2003, que dispõe sobre o registro, posse e comercialização de armas de fogo e munição, sobre o Sistema Nacional de Armas - Sinarm, define crimes e dá outras providências. 
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=353926">PL 6161/2005</a> - Revoga o § 2º, do art. 5º da Lei nº 10.826, de 22 de dezembro de 2003, que dispõe sobre registro, posse e comercialização de armas de fogo e munição, sobre o Sistema Nacional de Armas - Sinarm, define crimes e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=353943">PL 6162/2005</a> - Altera a redação do art. 15 da Lei nº 10.826, de 22 de dezembro de 2003, que dispõe sobre registro, posse e comercialização de armas de fogo e munição, sobre o Sistema Nacional de Armas - Sinarm, define crimes e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=353957">PL 6163/2005</a> - Dá nova redação ao art. 25 da Lei nº 10.826, de 22 de dezembro de 2003, que dispõe sobre registro, posse e comercialização de armas de fogo e munição, sobre o Sistema Nacional de Armas - Sinarm, define crimes e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=370583">PL 6540/2006</a> - Acrescenta o inciso XI ao art. 6º, da Lei nº 10.826, de 22 de dezembro de 2003, que dispõe sobre o registro, posse e comercialização de armas de fogo e munição, sobre o Sistema Nacional de Armas - Sinarm, define crimes e dá outras providências. 
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=407025">PL 7269/2006</a> - Altera a redação do § 1º do art. 6º, da Lei nº 10.826, de 22 de dezembro de 2003, que dispõe sobre o registro, posse e comercialização de armas de fogo e munição, sobre o Sistema Nacional de Armas - Sinarm, define crimes e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=465295">PL 1214/2007</a> - Dá nova redação ao § 4º, do art. 6º, da Lei nº 10.826, de 22 de dezembro de 2003, que dispõe sobre o registro, posse e comercialização de armas de fogo e munição, sobre o Sistema Nacional de Armas - Sinarm, define crimes e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=687070">PL 5982/2009</a> - Altera a redação do § 1º do art. 6º da Lei nº 10.826, de 22 de dezembro de 2003, que dispõe sobre registro, posse e comercialização de armas de fogo e munição, sobre o Sistema Nacional de Armas - Sinarm, define crimes e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=830370">PL 8018/2010</a> - Altera dispositivos da Lei nº 10.826, de 22 de dezembro de 2003, que dispõe sobre registro, posse e comercialização de armas de fogo e munição, sobre o Sistema Nacional de Armas - SINARM.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1225480">PL 7104/2014</a> - Acresce inciso ao art. 23, do Decreto-Lei nº 2.848, de 7 de dezembro de 1940, que institui o Código Penal, para não caracterizar como crime atos de defesa no interior de domicílio.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase impunity</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">private property</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1225481">PL 7105/2014</a> - Modifica as redações do parágrafo único do art. 23 e do art. 25, do Decreto-Lei 2.848, de 7 de dezembro de 1940, que institui o Código Penal, para não caracterizar como crime atos de legítima defesa própria e de terceiros.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase impunity</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">private property</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1237466">PL 7282/2014</a> - Altera a redação do art. 6º, da Lei 10.826, de 22 de dezembro de 2003, para disciplinar a concessão de porte de armas aos integrantes dos órgãos de segurança pública e demais cidadãos em decorrência de sua atividade.
+				
+					
+				<span class="badge badge-pill badge-secondary">guns laws</span>
+					
+				
+			</li>
+		
+			</ul>
+	</div>
+	<!-- </li> -->
+	
+	<!-- <li class="nav-item"> -->
+<!--		<a class="nav-link active show" data-toggle="tab" href="#activism">activism</a> -->
+			<div class="tab-pane fade active show" id="activism">
+			<ul>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1126448">PL 6277/2013</a> - Altera a redação do parágrafo único do art. 163, do Decreto-Lei nº 2.848, de 7 de dezembro de 1940, que institui o Código Penal  Brasileiro.
+				
+					
+				<span class="badge badge-pill badge-secondary">activism</span>
+					
+				<span class="badge badge-pill badge-secondary">social movements</span>
+					
+				<span class="badge badge-pill badge-secondary">protests</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			</ul>
+	</div>
+	<!-- </li> -->
+	
+	<!-- <li class="nav-item"> -->
+<!--		<a class="nav-link active show" data-toggle="tab" href="#militarism">militarism</a> -->
+			<div class="tab-pane fade active show" id="militarism">
+			<ul>
+		
+			<li><a href="None">PDC 193/1992</a> - REVOGA A PORTARIA 392, DE 13 DE MAIO DE 1992, DO GABINETE DO MINISTRO DA AERONAUTICA, QUE &#39;REGULAMENTA OS VALORES DA TAXA DE USO E DA INDENIZAÇÃO PELA OCUPAÇÃO DE PROPRIO NACIONAL RESIDENCIAL E DA OUTRAS PROVIDENCIAS&#39;.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PDC 330/1996</a> - SUSTA A APLICAÇÃO DO DISPOSTO NO DECRETO 2027, DE 11 DE OUTUBRO DE 1996, QUE &#39;DISPÕE SOBRE A NOMEAÇÃO PARA CARGO OU EMPREGO EFETIVO NA ADMINISTRAÇÃO PUBLICA FEDERAL DIRETA E INDIRETA DE SERVIDOR PUBLICO CIVIL APOSENTADO OU SERVIDOR PUBLICO MILITAR REFORMADO OU DA RESERVA REMUNERADA&#39;.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 25/1995</a> - REGULAMENTA O ARTIGO 53, INCISO QUARTO DO ATO DAS DISPOSIÇÕES CONSTITUCIONAIS TRANSITORIAS DA CONSTITUIÇÃO FEDERAL - ASSISTENCIA MEDICA, HOSPITALAR E EDUCACIONAL GRATUITA AOS EX-COMBATENTES DA SEGUNDA GUERRA MUNDIAL, EXTENSIVA AOS SEUS DEPENDENTES.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1382573">PDC 196/2015</a> - Ficam sustados os efeitos do inteiro teor do Decreto nº 8.515, de 3 de setembro de 2015, publicado na Seção 1 do Diário Oficial da União nº 170, de 4 de setembro de 2015.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1384447">PL 2968/2015</a> - Estabelece a competência dos Comandantes da Marinha, Exército e Aeronáutica para aprovar, em caráter final, os Regulamentos dos estabelecimentos de ensino militares.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=77385">PL 1955/1996</a> - Estabelece o dia 1º de janeiro como data-base dos servidores públicos civis e militares.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=23747">PL 2136/1996</a> - Dispõe sobre a data de pagamento dos servidores públicos federais civis e militares.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 943/1991</a> - REGULA A APLICAÇÃO DO ARTIGO 230, PARAGRAFO SEGUNDO DA CONSTITUIÇÃO FEDERAL PARA OS EX-COMBATENTES E DA OUTRAS PROVIDENCIAS.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=55938">PL 2712/2000</a> - Dispõe sobre a assistência médico-hospitalar aos ex-combatentes que tenham participado de operações bélicas durante a Segunda Guerra Mundial, nos termos da Lei nº 5.315, de 12 de setembro de 1967, e aos seus dependentes.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 1376/1991</a> - DISPÕE SOBRE O USO DE IMOVEIS MILITARES NA FORMA QUE MENCIONA E DA OUTRAS PROVIDENCIAS.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 1376/1995</a> - ALTERA DISPOSITIVO DA LEI 8237, DE 30 DE SETEMBRO DE 1991, QUE &#39;DISPÕE SOBRE A REMUNERAÇÃO DOS SERVIDORES MILITARES FEDERAIS DAS FORÇAS ARMADAS E DA OUTRAS PROVIDENCIAS.&#39; (CONCEDENDO AO MILITAR, NO PERIODO DE PASSAGEM PARA A RESERVA, UMA INDENIZAÇÃO CORRESPONDENTE AO VALOR DE DEZ REMUNERAÇÕES DO ULTIMO POSTO OU GRADUAÇÃO QUE POSSUIA NA ATIVA).
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 1472/1991</a> - ASSEGURA O ATENDIMENTO MEDICO AMBULATORIAL E HOSPITALAR AOS EX-COMBATENTES NA FORMA QUE ESPECIFICA E DA OUTRAS PROVIDENCIAS. 
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 1598/1996</a> - RESTABELECE A VINCULAÇÃO A UNIÃO DOS POLICIAIS MILITARES E DOS BOMBEIROS DO ANTIGO DISTRITO FEDERAL, OPTANTES DE ACORDO COM O ARTIGO 46 DA LEI 4242, DE 17 DE JULHO DE 1963, TRANSFERIDOS AO ENTÃO ESTADO DA GUANABARA, ATUAL ESTADO DO RIO DE JANEIRO, E DA OUTRAS PROVIDENCIAS.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 1737/1996</a> - REVOGA O ARTIGO 204 DO DECRETO-LEI 1001, DE 21 DE OUTUBRO DE 1969 - CODIGO PENAL MILITAR.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 1739/1991</a> - DISPÕE SOBRE A APLICAÇÃO DO DISPOSTO NA ALINEA &#39;H&#39; DO INCISO IV DO ARTIGO 50 DA   , DE 09 DE DEZEMBRO DE 1980, NO TOCANTE A MUDANÇA DE UNIFORME E DA OUTRAS PROVIDENCIAS.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 1991/1996</a> - CONCEDE INDENIZAÇÃO AOS BENEFICIARIOS DOS SERVIDORES PUBLICOS E DOS CIVIS MORTOS EM CONSEQUENCIA DE ATO OU FATO RELACIONADO COM O MOVIMENTO DE REPRESSÃO, NO PERIODO DE 02 DE SETEMBRO DE 1961 A 15 DE AGOSTO DE 1979, E DA OUTRAS PROVIDENCIAS.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=32189">PL 3662/2000</a> - Concede anistia de multas aplicadas a militares com base no art. 15, inciso I, &#34;e&#34;, da Lei nº 8.025, de 12 de abril de 1990.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 2662/1992</a> - DISPÕE SOBRE A IDENTIFICAÇÃO DOS EX-COMBATENTES E DA OUTRAS PROVIDENCIAS.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 2871/1997</a> - Acrescenta inciso ao artigo 50 da Lei nº 6.880, de 09 de dezembro de 1980, que &#34;DIspõe sobre o Estatuto dos Militares&#34;.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1438811">PEC 191/2016</a> - Acresce parágrafo único ao art. 88 da Constituição Federal, para determinar que o Ministro de Estado da Defesa seja escolhido entre os Oficiais Generais das Forças Armadas.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 3328/1992</a> - DISPÕE SOBRE O EXERCICIO DE ATIVIDADE PROFISSIONAL, NO MEIO CIVIL, POR MILITARES BACHAREIS EM DIREITO, ACRESCENTANDO PARAGRAFO QUARTO AO ARTIGO 29 DA LEI Nº 6.880, DE 09 DE DEZEMBRO DE 1980, QUE &#39;DISPÕE SOBRE O ESTATUTO DOS MILITARES&#39;.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1620619">PL 9064/2017</a> - Altera a redação do art. 292 do Decreto-Lei nº 3.689, de 3 de outubro de 1941 - Código de Processo Penal, e do art. 234 do Decreto-Lei nº 1.002, de 21 de outubro de 1969 - Código de Processo Penal Militar, para instituir a excludente de ilicitude nas ações de agentes públicos em operação policial.
+
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 4519/1994</a> - DISPÕE SOBRE A PERMANENCIA DE SARGENTO DO QUADRO ESPECIAL, DE QUE TRATA O DECRETO 86289, DE 11 DE AGOSTO DE 1981, NO SERVIÇO ATIVO DO EXERCITO.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 4689/1994</a> - DISPÕE SOBRE A INSTITUIÇÃO DE GRATIFICAÇÃO DE ATIVIDADE MILITAR PARA AS PRAÇAS PRESTADORAS DE SERVIÇO MILITAR INICIAL.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 4690/1994</a> - RESTABELECE O BENEFICIO DA LEI 8237, DE 30 DE SETEMBRO DE 1991, AOS SERVIDORES MILITARES.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PL 4910/1995</a> - INSTITUI O SERVIÇO MILITAR OBRIGATORIO PARA OS CONCLUDENTES DE CURSO DE TERCEIRO GRAU REALIZADO NA REDE DE ENSINO PUBLICO FEDERAL.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1522420">PL 4050/2001</a> - Altera a data do pagamento dos militares e dos servidores públicos civis.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=379869">PL 6696/2006</a> - Dá nova redação ao art. 1º da Lei nº 5.315, de 12 de setembro de 1967, que dispõe sobre os ex-combatentes da 2ª Guerra Mundial.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=395966">PL 7049/2006</a> - Autoriza o Poder Executivo a criar um Colégio Militar no Município de Resende, no Estado do Rio de Janeiro.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=395968">PL 7050/2006</a> - Autoriza o Poder Executivo a criar um Colégio Militar no Bairro de Realengo, Município do Rio de Janeiro, capital do Estado do Rio de Janeiro.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=433867">PL 35/2007</a> - Dispõe sobre a data de pagamento das remunerações, dos proventos e das pensões dos servidores públicos civis do Poder Executivo, dos militares da União e de seus pensionistas.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=476395">PL 1446/2007</a> - Promove &#34;post mortem&#34; ao posto de Capitão o 3° Sargento Mário Kozel Filho e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">apology to dictadorship</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=557360">PEC 249/2008</a> - Dá nova redação ao inciso VIII do art. 142, da Constituição Federal, para fixar, em subsídios, as remunerações dos membros das Forças Armadas.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=589047">PL 3781/2008</a> - Acresce parágrafo único ao artigo 32 da Lei nº 7.289, de 18 de dezembro de 1984, que dispõe sobre o Estatuto dos Policiais-Militares da Polícia Militar do Distrito Federal, e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=64299">PL 2004/1996</a> - Projeto de lei que dispõe sobre o valor da pensão deferida aos beneficiários dos servidores públicos mortos em consequência de ato ou fato relacionado com o movimento de repressão, no período de 2 de setembro de 1961 a 15 de agosto de 1979, e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=25058">PL 4585/1998</a> - Projeto de lei que dispõe sobre a confirmação no posto de 2º Tenente dos ex-combatentes da 2ª Guerra Mundial, reformados nos termos do Decreto-Lei nº 8795, de 1946 e Lei 2579, de 1955.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=615562">PL 4326/2008</a> - Acrescenta art. 46-A à Lei nº 5.292, de 8 de junho de 1967, que dispõe sobre a prestação do Serviço Militar pelos estudantes de Medicina, Farmácia, Odontologia e Veterinária e pelos Médicos, Farmacêuticos, Dentistas e Veterinários, em decorrência de dispositivos da Lei nº 4.375, de 17 de agosto de 1964, para conceder incentivo aos médicos que tenham realizado o Estágio de Adaptação e Serviços (EAS) nas Forças Armadas.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=646884">PEC 352/2009</a> - Dá nova redação ao inciso IX do art. 142 da Constituição Federal.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=695344">PEC 410/2009</a> - Acrescenta o § 3º ao art. 42 da Constituição Federal.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=35288">PL 6799/2002</a> - Altera dispositivos da Lei nº 8.059, de 4 de julho de 1990, que dispõe sobre a pensão especial devida aos ex-combatentes da Segunda Guerra Mundial e a seus dependentes.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1214701">PL 6997/2013</a> - Altera a redação da art. 113 da Lei nº 6.880, de 9 de dezembro de 1980, que dispõe sobre o Estatuto dos Militares.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1307683">PL 647/2015</a> - Acresce o § 3º ao art. 31 da Lei nº 3.765, de 4 de maio de 1960, que dispõe sobre as pensões militares, para instituir prazo obrigatório para julgamento da legalidade da concessão de pensões militares.
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			</ul>
+	</div>
+	<!-- </li> -->
+	
+	<!-- <li class="nav-item"> -->
+<!--		<a class="nav-link active show" data-toggle="tab" href="#crimes">crimes</a> -->
+			<div class="tab-pane fade active show" id="crimes">
+			<ul>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1345698">PL 1824/2015</a> - Altera o Decreto-Lei nº 2.848, de 7 de dezembro de 1940, e a Lei nº 7.210, de 11 de julho de 1984, impondo pena mínima de dez anos de reclusão para o indivíduo que praticar três crimes.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PDC 556/1997</a> - ESTABELECE PLEBISCITO SOBRE A APLICAÇÃO DA PRISÃO PERPETUA.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PDC 557/1997</a> - ESTABELECE PLEBISCITO SOBRE A APLICAÇÃO DE TRABALHO FORÇADO.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PDC 558/1997</a> - ESTABELECE PLEBISCITO SOBRE A APLICAÇÃO DA PENA DE MORTE.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1379390">PL 2832/2015</a> - Acresce inciso ao art. 23, do Decreto-Lei 2.848, de 7 de dezembro de 1940, que institui o Código Penal, para não caracterizar como crime atos de defesa do patrimônio.
+				
+					
+				<span class="badge badge-pill badge-secondary">activism</span>
+					
+				<span class="badge badge-pill badge-secondary">social movements</span>
+					
+				<span class="badge badge-pill badge-secondary">protests</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=18105">PL 2799/2000</a> - Acrescenta o § 4º ao art. 261 do Decreto-Lei nº 2.848, de 7 de dezembro de 1940 - Código Penal.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1411111">PL 3582/2015</a> - Acresce o § 6º ao art. 150, do Decreto-Lei 2.848, de 7 de dezembro de 1940, que institui o Código Penal, para não caracterizar como crime lesões decorrentes de invasão de domicílio, que venham a ser causadas ao invasor.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">private property</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase impunity</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">weaken punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1441302">PL 4689/2016</a> - Altera o Decreto-Lei nº 2.848, de 7 de dezembro de 1940, que institui o Código Penal, para dispor sobre o furto, roubo, dano e receptação de defensivos agrícolas, seus componentes e afins.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1443560">PL 4730/2016</a> - Altera a Lei nº 8.072, de 25 de julho de 1990, para incluir no rol dos crimes hediondos aqueles dolosos, praticados com arma de fogo, mediante violência ou grave ameaça à pessoa.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=434664">PL 106/2007</a> - Acrescenta inciso ao art. 1º da Lei nº 8.072, de 25 de julho de 1990, que dispõe sobre os crimes hediondos.
+
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">private property</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=522766">PDC 403/2007</a> - Convoca plebiscito nos termos do art. 49, inciso XV da Constituição Federal para os fins que especifica.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">criminal legal age</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=641704">PL 4927/2009</a> - Dá novas redações às alíneas &#34;a&#34; e &#34;b&#34;, do inciso I, do art. 89, do Decreto-Lei nº 1.001, de 21 de outubro de 1969 (Código Penal Militar), que estabelecem condições para concessão de livramento condicional.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">militarism</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=829767">PL 8006/2010</a> - Altera dispositivos do Decreto-lei nº 2.848, de 07 de dezembro de 1940 (Código Penal), da Lei nº 7.210, de 11 de julho de 1884 (Lei de Execuções Penais) e da Lei nº 8.072, de 25 de julho de 1990, relativamente aos crimes de quadrilha, associação para o tráfico ilícito de entorpecentes e drogas afins e contra o patrimônio praticados com grave ameaça ou violência à pessoa.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1026460">PL 4450/2012</a> - Acrescenta parágrafo ao art. 72, da Lei nº 11.343, de 26 de agosto de 2006, para viabilizar o uso de drogas apreendidas para fins específicos de adestramento de cães, na forma que menciona.
+				
+					
+				<span class="badge badge-pill badge-secondary">security</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1069821">PL 5242/2013</a> - Dá nova redação ao inciso I do art. 1º da Lei nº 8.072, de 25 de julho de 1990, para incluir os crimes passionais como hediondos e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1078354">PL 5398/2013</a> - Altera as redações do parágrafo único do art. 83, dos arts. 213, caput e §§ 1º e 2º e 217-A, caput e §§ 3º e 4º, todos do Decreto-lei nº 2.848, de 7 de dezembro de 1940 e a do § 2º do art. 2º da Lei nº 8.072, de 25 de julho de 1990.
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1084577">PL 5490/2013</a> - Inclui parágrafo no art. 59 do Decreto-lei nº 2.848, de 7 de dezembro de 1940 (Código Penal) para aplicação de pena no caso em que o crime cometido com concursos de pessoas tenha participação de menor.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1247433">PL 7421/2014</a> - Altera a redação do art. 65 e seu § 1º, da Lei nº 9.605, de 12 de fevereiro de 1998, para agravar as penas do crime de pichação.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase punishment</span>
+					
+				
+			</li>
+		
+			</ul>
+	</div>
+	<!-- </li> -->
+	
+	<!-- <li class="nav-item"> -->
+<!--		<a class="nav-link active show" data-toggle="tab" href="#dictatorship">dictatorship</a> -->
+			<div class="tab-pane fade active show" id="dictatorship">
+			<ul>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1292587">PL 8246/2014</a> - Cria a Comissão da Verdade (CV) no âmbito da Casa Civil da Presidência da República.
+				
+					
+				<span class="badge badge-pill badge-secondary">apology to dictadorship</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1303100">PL 443/2015</a> - Denomina &#34;Mar Presidente Médici - Amazônia Azul&#34; a Zona Econômica Exclusiva brasileira, faixa que se estende das doze às duzentas milhas marítimas, contadas a partir das linhas de base que servem para medir a largura do mar territorial.
+				
+					
+				<span class="badge badge-pill badge-secondary">apology to dictadorship</span>
+					
+				
+			</li>
+		
+			</ul>
+	</div>
+	<!-- </li> -->
+	
+	<!-- <li class="nav-item"> -->
+<!--		<a class="nav-link active show" data-toggle="tab" href="#other">other</a> -->
+			<div class="tab-pane fade active show" id="other">
+			<ul>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=107494">PEC 584/2002</a> - Dá nova redação ao parágrafo 7º, do art. 226 da Constituição Federal.
+				
+					
+				<span class="badge badge-pill badge-secondary">human rights</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">sterilisation</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">familiar planning</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=120347">PL 515/2003</a> - Acrescenta dispositivo à Lei nº 4.898, de 9 de dezembro de 1965, que &#34;regula o Direito de Representação e o processo de Responsabilidade Administrativa Civil e Penal, nos casos de abuso de autoridade&#34;.
+				
+					
+				<span class="badge badge-pill badge-secondary">congress</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=184850">PL 2602/2003</a> - Altera a redação do art. 53 e o parágrafo único do art. 59 da Lei nº 10.406, de 10 de janeiro de 2002, que institui o Código Civil.
+				
+					
+				<span class="badge badge-pill badge-secondary">other</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1369198">PDC 158/2015</a> - Ficam sustados os efeitos do inteiro teor do Decreto nº 8.497, de 4 de agosto de 2015, que regulamenta a formação do Cadastro Nacional de Especialistas, publicado na Seção 1 do Diário Oficial da União nº 148, de 05 de agosto de 2015
+				
+					
+				<span class="badge badge-pill badge-secondary">other</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=47741">PL 895/1991</a> - Revoga dispositivos da Lei nº 8.177, de 1º de março de 1991, que &#34;estabelece regras para desindexação da economia e dá outras providências&#34;
+				
+					
+				<span class="badge badge-pill badge-secondary">economics</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=256345">PDC 170/1992</a> - REVOGA A PORTARIA 580, DE 15 DE NOVEMBRO DE 1991, DO MINISTRO DE ESTADO DA JUSTIÇA.
+				
+					
+				<span class="badge badge-pill badge-secondary">human rights</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">indian rights</span>
+					
+				
+			</li>
+		
+			<li><a href="None">PEC 93/1992</a> - DA NOVA REDAÇÃO AO ARTIGO 50 E SEUS PARAGRAFOS DO TITULO IV, CAPITULO PRIMEIRO, SEÇÃO II, DA CONSTITUIÇÃO FEDERAL.
+				
+					
+				<span class="badge badge-pill badge-secondary">congress</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=33416">PL 3277/1997</a> - Estabelece o direito de o parlamentar comunicar-se, pessoal e reservadamente, com o cidadão, quando este se achar preso.
+
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">congress</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=400102">PL 7151/2006</a> - Altera a redação do  inciso I, do art. 41 da Lei nº 8.213, de 24 de julho de 1991, que dispõe sobre os Planos de Benefícios da Previdência Social e dá outras providências, assegurando o reajustamento em percentual igual ou superior ao concedido ao salário mínimo na mesma data.
+				
+					
+				<span class="badge badge-pill badge-secondary">economics</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=434188">PL 72/2007</a> - Acresce § 5º ao art. 280 da Lei 9.503, de 23 de setembro de 1997, que instituiu o Código de Trânsito Brasileiro.
+				
+					
+				<span class="badge badge-pill badge-secondary">traffic code</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">weaken punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=442422">PL 425/2007</a> - Altera a redação do § 2º, do art. 3º, da Lei nº 9.099, de 26 de setembro de 1995.
+				
+					
+				<span class="badge badge-pill badge-secondary">other</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=462232">PL 1127/2007</a> - Institui a Semana Nacional da Saúde Masculina.
+				
+					
+				<span class="badge badge-pill badge-secondary">useless</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=522765">PL 2426/2007</a> - Extingue a exigência do Exame de Ordem previsto na Lei nº 8.906, de 4 de julho de 1994, para inscrição de advogados na Ordem dos Advogados do Brasil.
+				
+					
+				<span class="badge badge-pill badge-secondary">bar association</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=596353">PL 4011/2008</a> - Altera a Lei nº 8.078, de 11 de setembro de 1990, que dispõe sobre a proteção e defesa do consumidor, para estabelecer obrigatoriedade de fornecimento de certidão de quitação de débitos por concessionárias e prestadoras de serviço público.
+				
+					
+				<span class="badge badge-pill badge-secondary">consumer code</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=596354">PL 4012/2008</a> - Altera a Lei nº 8.078, de 11 de setembro de 1990, que dispõe sobre a proteção e defesa do consumidor.
+				
+					
+				<span class="badge badge-pill badge-secondary">consumer code</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=626434">PL 4517/2008</a> - Cria o Cadastro Nacional de Bloqueio ao Telemarketing e dá outras providências.
+				
+					
+				<span class="badge badge-pill badge-secondary">consumer code</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=631100">PEC 321/2009</a> - Acrescenta parágrafo ao art. 166 da Constituição Federal.
+				
+					
+				<span class="badge badge-pill badge-secondary">congress</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=633531">PRC 156/2009</a> - Altera o § 1º do art. 79 do Regimento Interno da Câmara dos Deputados para assegurar a fixação do crucifixo na parede do plenário, atrás da mesa.
+				
+					
+				<span class="badge badge-pill badge-secondary">religion</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">useless</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=647448">PL 5065/2009</a> - Acrescenta parágrafo único ao art. 218 da Lei nº 9.503, de 23 de setembro de 1997, que institui o Código de Trânsito Brasileiro.
+				
+					
+				<span class="badge badge-pill badge-secondary">traffic code</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=667119">PL 5481/2009</a> - Altera o inciso XIV da Lei nº 7.713, de 22 de dezembro de 1988, com a redação dada pela Lei nº 11.052, de 29 de dezembro de 2004, para incluir entre os rendimentos isentos do imposto de renda os proventos percebidos pelos portadores de Lúpus Eritematoso Sistêmico.
+				
+					
+				<span class="badge badge-pill badge-secondary">taxes</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1280197">PL 6181/2002</a> - Altera o inciso II do § 3º do art. 6º da Lei nº 8.987, de 13 de fevereiro de 1995, e dá outras providências, vedando a interrupção da prestação de serviços públicos por atraso no pagamento inferior a sessenta dias.
+				
+					
+				<span class="badge badge-pill badge-secondary">consumer code</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=778065">PDC 2767/2010</a> - Revoga a Resolução nº 277, de 28 de maio de 2008, do Conselho Nacional de Trânsito - CONTRAN, que dispõe sobre o transporte de menores de 10 anos e a utilização do dispositivo de retenção para o transporte de crianças em veículos.
+				
+					
+				<span class="badge badge-pill badge-secondary">traffic code</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">weaken punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=778068">PL 7464/2010</a> - Inclui parágrafo único no art. 65 da Lei nº 9.503, de 23 de setembro de 1997, que instituiu o Código de Trânsito Brasileiro - CTB.
+				
+					
+				<span class="badge badge-pill badge-secondary">traffic code</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">weaken punishment</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=839057">PL 367/2011</a> - Dá nova redação ao § 1º do art. 261 da Lei nº 9.503, de 23 de setembro de 1997, que institui o Código de Trânsito Brasileiro.
+				
+					
+				<span class="badge badge-pill badge-secondary">traffic code</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">increase impunity</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1214700">PL 6996/2013</a> - Altera a redação do inciso II, do art. 4º, da Lei nº 10.406, de 10 de janeiro de 2002, que institui o Código Civil.
+				
+					
+				<span class="badge badge-pill badge-secondary">penal laws</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1249681">PL 7473/2014</a> - Altera a redação do inciso XIV, do artigo 6º, da Lei nº 7.713, de 22 de novembro de 1998, que altera a legislação do imposto de renda e dá outras providências, para incluir os portadores de doença pulmonar obstrutiva crônica - DPOC - enfisema pulmonar, no rol de isentos de tributação.
+				
+					
+				<span class="badge badge-pill badge-secondary">taxes</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1249764">PL 7483/2014</a> - Confere ao Município de Porto Real, no Estado do Rio de Janeiro, o título de Berço da Colonização Italiana no Brasil.
+				
+					
+				<span class="badge badge-pill badge-secondary">useless</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1258627">PL 7641/2014</a> - Acresce o inciso XIV-A, ao artigo 6º, da Lei nº 7.713 de 22 de dezembro de 1988, para conceder isenção de imposto de renda para quem tiver dependente legal portador de doença relacionada.
+				
+					
+				<span class="badge badge-pill badge-secondary">economics</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=86314">PL 7173/2002</a> - Dispõe sobre o exercício da profissão de Topógrafo.
+				
+					
+				<span class="badge badge-pill badge-secondary">other</span>
+					
+				
+			</li>
+		
+			<li><a href="http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?codteor=1290527">PL 8176/2014</a> - Acresce inciso ao § 2º do art. 121, do Decreto-Lei 2.848, de 7 de dezembro de 1940, que institui o Código Penal, e altera o inciso I do art. 1º da Lei nº 8.072, de 25 de julho de 1990, tornando hediondos os crimes cometidos contra as vidas de servidores da segurança pública e seus familiares.
+				
+					
+				<span class="badge badge-pill badge-secondary">security</span>
+					
+				
+					
+				<span class="badge badge-pill badge-secondary">crimes</span>
+					
+				
+			</li>
+		
+			</ul>
+	</div>
+	<!-- </li> -->
+	
+</div>
+
+<h2><i class="fas fa-database"></i> Datasets</h2>
+
+<ul>
+   <li>All information collected from <a href="http://dadosabertos.camara.leg.br/">Open Database of Brazil's Parliament</a> (Lower House)</li>
+   <li>Collected and reorganized <a href="dataset-bolsonaro-analysis.tgz">data used for this analysis</a></li>
+   <li>For source code check github</li>
+</ul>
+</div>
+
+</body>
+</html>
