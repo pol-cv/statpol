@@ -2,6 +2,6 @@
 
 ## Como os dados foram coletados
 
-## DÃvidas
+## DÃƒvidas
 
 * pol-cv@protonmail.com
